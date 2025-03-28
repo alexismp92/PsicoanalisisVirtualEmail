@@ -20,7 +20,7 @@ class AWSConfigurationTest {
     }
 
     @Test
-    void s3Client_Test(){
+    void s3ClientTest(){
         S3Properties s3Properties = new S3Properties();
         s3Properties.setRegion("us-east-1");
         s3Properties.setBucketName("bucketName");
