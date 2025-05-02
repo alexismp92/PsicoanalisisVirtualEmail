@@ -23,4 +23,4 @@ Create a docker network `docker network create pv-network`.
 
 Execute command `docker run -d --hostname mailhog --network pv-network -p 1025:1025 -p 8025:8025 <mailhog-image-id>`
 
-Execute command `docker run -d --network pv-network -p 8080:8080 <pv-email-image-id>`
+Execute command `docker run -d --network pv-network -p 8081:8080 <pv-email-image-id>`

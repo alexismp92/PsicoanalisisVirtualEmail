@@ -35,3 +35,8 @@ build/
 /mvnw.cmd
 /.gitattributes
 /.mvn/wrapper/maven-wrapper.properties
+
+##mvn
+maven-wrapper.properties
+mvnw
+mvnw.cmd

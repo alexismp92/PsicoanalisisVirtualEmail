@@ -38,7 +38,7 @@ class EmailControllerTest {
 
     @Test
     void testSendEmail() throws Exception {
-        String emailJson = "{\"emailFrom\":\"noreply@example.com\",\"emails\":[\"test@example.com\"],\"subject\":\"Test Subject\",\"message\":\"<html><body><h1>TestBody</h1><img src='cid:logo.jpg'></body></html>\"}";
+        String emailJson = "{\"emailType\":\"REG_USER\",\"emails\":[\"test@example.com\"]}";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -48,7 +48,27 @@ class EmailControllerTest {
 
     @Test
     void testSendEmailInvalidRequest() throws Exception {
-        String emailJson = "{\"emailFrom\":\"\",\"emails\":[\"test@example.com\"],\"subject\":\"\",\"message\":\"\"}";
+        String emailJson = "{\"emailType\":\"\",\"emails\":[\"test@example.com\"]";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(emailJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testSendEmailInvalidEmail() throws Exception {
+        String emailJson = "{\"emailType\":\"APPROVED_USER\",\"emails\":[\"test@\"]}";
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(emailJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testSendEmailInvalidEmailType() throws Exception {
+        String emailJson = "{\"emailType\":\"UNKNOWN\",\"emails\":[\"test@tes.com\"]}";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
                         .contentType(MediaType.APPLICATION_JSON)

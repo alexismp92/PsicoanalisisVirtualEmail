@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.psicovirtual.email.utils.Constants.BACK_SLASH;
 import static com.psicovirtual.email.utils.Utils.findFilesWithPrefix;
 
 @Service

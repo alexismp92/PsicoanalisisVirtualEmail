@@ -1,5 +1,4 @@
 # Use an official OpenJDK runtime as a parent image
-#FROM openjdk:22-jdk
 FROM alpine/java:22-jdk
 
 # Set the working directory in the container
