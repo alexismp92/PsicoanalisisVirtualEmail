@@ -40,7 +40,7 @@ class EmailControllerTest {
     void testSendEmail() throws Exception {
         String emailJson = "{\"emailType\":\"REG_USER\",\"emails\":[\"test@example.com\"]}";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isOk());
@@ -50,7 +50,7 @@ class EmailControllerTest {
     void testSendEmailInvalidRequest() throws Exception {
         String emailJson = "{\"emailType\":\"\",\"emails\":[\"test@example.com\"]";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
@@ -60,7 +60,7 @@ class EmailControllerTest {
     void testSendEmailInvalidEmail() throws Exception {
         String emailJson = "{\"emailType\":\"APPROVED_USER\",\"emails\":[\"test@\"]}";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
@@ -70,7 +70,7 @@ class EmailControllerTest {
     void testSendEmailInvalidEmailType() throws Exception {
         String emailJson = "{\"emailType\":\"UNKNOWN\",\"emails\":[\"test@tes.com\"]}";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());

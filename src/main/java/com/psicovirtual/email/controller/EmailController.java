@@ -1,6 +1,5 @@
 package com.psicovirtual.email.controller;
 
-import com.psicovirtual.email.dto.EmailDTO;
 import com.psicovirtual.email.dto.EmailRequestDTO;
 import com.psicovirtual.email.exception.EmailException;
 import com.psicovirtual.email.service.EmailService;
@@ -18,14 +17,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/email")
+@RequestMapping("/emails")
 @Validated
 @Tag(name = "Email Service")
 public class EmailController {
 
     private final EmailService emailService;
 
-    @PostMapping(value = "/send")
+    @PostMapping(value = "/actions/send")
     @Operation(summary = "Send an email notification",
             description = "Method which send an email notification to the desired emails",
             responses = {
