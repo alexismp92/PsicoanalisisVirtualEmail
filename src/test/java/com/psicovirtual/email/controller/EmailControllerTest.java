@@ -27,7 +27,7 @@ class EmailControllerTest {
 
     @BeforeEach
     void setUp() {
-        greenMail = new GreenMail(new ServerSetup(1025, null, "smtp"));
+        greenMail = new GreenMail(new ServerSetup(8025, null, "smtp"));
         greenMail.start();
     }
 
@@ -38,7 +38,17 @@ class EmailControllerTest {
 
     @Test
     void testSendEmail() throws Exception {
-        String emailJson = "{\"emailType\":\"REG_USER\",\"emails\":[\"test@example.com\"]}";
+        String emailJson = """
+                {
+                  "emailType": "WELCOME_USER",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@hotmail.com"
+                  ],
+                  "values": {
+                    "NAME": "JHON"                  }
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -48,7 +58,22 @@ class EmailControllerTest {
 
     @Test
     void testSendEmailInvalidRequest() throws Exception {
-        String emailJson = "{\"emailType\":\"\",\"emails\":[\"test@example.com\"]";
+
+        String emailJson = """
+                {
+                  "emailType": "WELCOME_USER",
+                  "language": "FRANCOIS",
+                  "emails": [
+                    "test@hotmail.com"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,7 +83,22 @@ class EmailControllerTest {
 
     @Test
     void testSendEmailInvalidEmail() throws Exception {
-        String emailJson = "{\"emailType\":\"APPROVED_USER\",\"emails\":[\"test@\"]}";
+
+        String emailJson = """
+                {
+                  "emailType": "APPROVED_USER",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -68,7 +108,21 @@ class EmailControllerTest {
 
     @Test
     void testSendEmailInvalidEmailType() throws Exception {
-        String emailJson = "{\"emailType\":\"UNKNOWN\",\"emails\":[\"test@tes.com\"]}";
+        String emailJson = """
+                {
+                  "emailType": "",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
 
         mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
                         .contentType(MediaType.APPLICATION_JSON)

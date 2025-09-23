@@ -37,6 +37,4 @@ build/
 /.mvn/wrapper/maven-wrapper.properties
 
 ##mvn
-maven-wrapper.properties
-mvnw
-mvnw.cmd
+./mvn/**

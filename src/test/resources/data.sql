@@ -1,6 +1,20 @@
-INSERT INTO EMAIL_CONFIG (EMAIL_ID, TYPE, EMAIL_FROM, EMAIL_TO, SUBJECT, MESSAGE) VALUES
-(NEXT VALUE FOR EMAIL_CONFIG_SEQUENCE, 'REG_ADMIN', 'noreply@psicoanalisisvirtual.com', 'admins@psicoanalisisvirtual.com', 'New user registered', '<html><body><p>New therapist registered, please review the registration.</p><img src=''cid:logo.jpg''></body></html>'),
-(NEXT VALUE FOR EMAIL_CONFIG_SEQUENCE, 'REG_USER', 'noreply@psicoanalisisvirtual.com', null, 'Registration pending to review', '<html><body><p>Your registration is pending to review, we will notify you when it is accepted or rejected.</p><img src=''cid:logo.jpg''></body></html>'),
-(NEXT VALUE FOR EMAIL_CONFIG_SEQUENCE, 'APPROVED_USER', 'noreply@psicoanalisisvirtual.com', null, 'Welcome to psicoanalisis virtual', '<html><body><p>Your registration request was approved. To start, please continue to our login portal.</p><img src=''cid:logo.jpg''></body></html>'),
-(NEXT VALUE FOR EMAIL_CONFIG_SEQUENCE, 'REJECTED_USER', 'noreply@psicoanalisisvirtual.com', null, 'Psicoanalisis Virtual Community Update', '<html><body><p>Unfortunately, your request to join to the community was rejected. We well keep you in touch for future opportunities with us.</p><img src=''cid:logo.jpg''></body></html>');
+INSERT INTO LANGUAGES (LANGUAGE_ID, LANGUAGE_CODE, LANGUAGE_NAME) VALUES
+(NEXT VALUE FOR LANGUAGES_SEQUENCE, 'EN', 'ENGLISH'),
+(NEXT VALUE FOR LANGUAGES_SEQUENCE, 'ES', 'ESPANOL');
+
+INSERT INTO EMAIL_TYPES (EMAIL_TYPE_ID, EMAIL_TYPE) VALUES
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'WELCOME_USER'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'WELCOME_THERAPIST'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'APPROVED_THERAPIST'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'REJECTED_THERAPIST'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'TOKEN_RESET'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'PASSWORD_UPDATE'),
+(NEXT VALUE FOR EMAIL_TYPES_SEQUENCE, 'PENDING_ADMIN');
+
+INSERT INTO EMAIL_CONFIGS (EMAIL_CFG_ID, EMAIL_TYPE_ID, LANGUAGE_ID, EMAIL_FROM, EMAIL_TO, SUBJECT, FILE_PATH) VALUES
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 1, 1, 'support@psicoanalisisvirtual.com', null, 'Welcome to Psicoanalisis Virtual', 'EMAIL\EN\WELCOME_USER.HTML'),
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 2, 1, 'support@psicoanalisisvirtual.com', null, 'Welcome to Psicoanalisis Virtual', 'EMAIL\EN\WELCOME_THERAPIST.HTML'),
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 3, 1, 'support@psicoanalisisvirtual.com', null, 'Your request has been approved', 'EMAIL\EN\APPROVED_THERAPIST.HTML'),
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 4, 1, 'support@psicoanalisisvirtual.com', null, 'Your request has been denied', 'EMAIL\EN\DENIED_THERAPIST.HTML'),
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 5, 1, 'noreply@psicoanalisisvirtual.com', null, 'Token Reset', 'EMAIL\EN\TOKEN_RESET.HTML');
 

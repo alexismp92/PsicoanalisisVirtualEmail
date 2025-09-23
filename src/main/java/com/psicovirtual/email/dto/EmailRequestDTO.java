@@ -1,13 +1,14 @@
 package com.psicovirtual.email.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.psicovirtual.email.utils.enums.EmailContentEnum;
+import com.psicovirtual.email.utils.enums.EmailTypeEnum;
+import com.psicovirtual.email.utils.enums.LanguageEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.Set;
 
 @Data
@@ -16,10 +17,9 @@ import java.util.Set;
 @Builder
 public class EmailRequestDTO {
 
-    @NotEmpty
-    @Pattern(regexp = "^[a-zA-Z_]+$", message = "email type must contain only letters and underscores")
-    @Size(min = 1, max = 100, message = "email type must be between 1 and 250 characters")
-    private String emailType;
+    private EmailTypeEnum emailType;
+    private LanguageEnum language;
     private Set<String> emails;
+    private HashMap<EmailContentEnum, String> values;
 
 }

@@ -1,16 +1,15 @@
 package com.psicovirtual.email.utils;
 
 import com.psicovirtual.email.exception.EmailException;
+import com.psicovirtual.email.utils.enums.EmailContentEnum;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,26 +18,13 @@ import static com.psicovirtual.email.utils.Constants.*;
 @Slf4j
 public class Utils {
 
-    public static String getExtension(String filename) throws EmailException {
+    public static String getExtension(String filename) throws FileNotFoundException {
         var lastDotIndex = filename.lastIndexOf(DOT);
 
         if (lastDotIndex <= 0){
-            throw new EmailException("Invalid file extension");
+            throw new FileNotFoundException( "Invalid file extension");
         }
         return filename.substring(lastDotIndex + 1);
-    }
-
-    public static Set<String> extractImgIdentifiers(String input) {
-        log.debug("Extracting img identifiers from input: " + input);
-        Set<String> identifiers = new HashSet<>();
-        Pattern pattern = Pattern.compile(IMG_REGEX);
-        Matcher matcher = pattern.matcher(input);
-        while (matcher.find()) {
-            identifiers.add(matcher.group(1));
-        }
-        log.info("Extracted img identifiers: " + identifiers);
-
-        return identifiers;
     }
 
     public static List<Path> findFilesWithPrefix(Path dir, String prefix) throws IOException {
@@ -49,6 +35,16 @@ public class Utils {
             }
         }
         return result;
+    }
+
+
+    public static String replacePlaceHolders(String html, HashMap<EmailContentEnum, String> values){
+        String htmlReplaced = html;
+        for(var entry : values.entrySet()){
+            htmlReplaced = htmlReplaced.replaceAll(entry.getKey().getId(), entry.getValue());
+        }
+
+        return htmlReplaced;
     }
 
 }

@@ -13,6 +13,7 @@ import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -35,30 +36,28 @@ public class AWSBucketService implements IBucketOperations {
     private final S3Client s3Client;
 
     @Override
-    public Set<File> download(Set<String> keys) throws EmailException {
-        Set<File> downloadedFiles = new HashSet<>();
+    public File download(String key) throws FileNotFoundException {
+        File downloadedFile = null;
         try{
             isBucketExists(s3Properties.getBucketName());
 
-            for (String key : keys) {
-                final var extension = getExtension(key);
+            final var extension = getExtension(key);
 
-                var getObjectResponse = s3Client.getObject(GetObjectRequest.builder()
-                        .bucket(s3Properties.getBucketName())
-                        .key(String.format(SLASH, s3Properties.getImageFolder(),key))
-                        .build());
+            var getObjectResponse = s3Client.getObject(GetObjectRequest.builder()
+                    .bucket(s3Properties.getBucketName())
+                    .key(String.format(SLASH, s3Properties.getImageFolder(),key))
+                    .build());
 
-                var file = Files.createTempFile(S3, String.join(DOT,extension));
-                Files.copy(getObjectResponse, file, StandardCopyOption.REPLACE_EXISTING);
-                log.info("File downloaded to: " + file);
-                downloadedFiles.add(file.toFile());
-            }
+            var file = Files.createTempFile(S3, String.join(DOT,extension));
+            Files.copy(getObjectResponse, file, StandardCopyOption.REPLACE_EXISTING);
+            log.info("File downloaded to: " + file);
+            downloadedFile = file.toFile();
 
         }catch (IOException | S3Exception e){
             log.error("Download failed: " + e.getMessage());
-            throw new EmailException(e.getMessage());
+            throw new FileNotFoundException(e.getMessage());
         }
-        return downloadedFiles;
+        return downloadedFile;
     }
 
 

@@ -14,8 +14,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
-import java.io.File;
-import java.util.Set;
+import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,25 +33,25 @@ public class AWSBucketServiceTest {
 
     @Test
     public void testDownloadSuccess() throws Exception {
-        Set<String> keys = Set.of("logo.jpg");
+        var key = "static/EMAIL/EN/WELCOME_USER.HTML";
 
         ResponseInputStream<GetObjectResponse> objectResponse = mock(ResponseInputStream.class);
         when(s3Client.getObject(any(GetObjectRequest.class))).thenReturn(objectResponse);
         when(s3Properties.getBucketName()).thenReturn("test-bucket");
-        when(s3Properties.getImageFolder()).thenReturn("images");
+        when(s3Properties.getImageFolder()).thenReturn("static");
 
-        Set<File> downloadedFiles = awsBucketService.download(keys);
+        var downloadedFiles = awsBucketService.download(key);
 
-        assertEquals(1, downloadedFiles.size());
+        assertNotNull(downloadedFiles);
         verify(s3Client, times(1)).getObject(any(GetObjectRequest.class));
     }
 
     @Test
-    public void testDownloadS3Exception() {
-        Set<String> keys = Set.of("logo.jpg");
+    public void testDownloadFileNotFoundException() {
+        var key = "static/EMAIL/EN/WELCOME_USER.HTML";
         when(s3Client.getObject(any(GetObjectRequest.class))).thenThrow(S3Exception.class);
 
-        assertThrows(EmailException.class, () -> awsBucketService.download(keys));
+        assertThrows(FileNotFoundException.class, () -> awsBucketService.download(key));
     }
 
     @Test
