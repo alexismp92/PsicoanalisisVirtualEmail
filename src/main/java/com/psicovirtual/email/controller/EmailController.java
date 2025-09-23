@@ -24,7 +24,7 @@ public class EmailController {
 
     private final EmailService emailService;
 
-    @PostMapping(value = "/actions/send")
+    @PostMapping(value = "/send")
     @Operation(summary = "Send an email notification",
             description = "Method which send an email notification to the desired emails",
             responses = {
