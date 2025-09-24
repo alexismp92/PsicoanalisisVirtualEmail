@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Request Denied</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e4e4e4;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+        p {
+            color: #555555;
+            line-height: 1.5;
+        }
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="{{logo_url}}" alt="{{company}}">
+    </div>
+
+    <h1>Hello, {{name}}!</h1>
+
+    <p>We wanted to inform your account has been <strong>locked</strong> due to a violation of our terms and conditions.</p>
+
+    <p>If you believe there is a mistake or have questions about the decision, please contact our support team. We are happy to provide guidance or help to clarify any questions.</p>
+
+    <p style="text-align: center;">
+        <a href="{{support_url}}" class="button">Contact Support</a>
+    </p>
+
+    <div class="footer">
+        &copy; {{year}} {{company}}. All rights reserved.<br>
+        {{address}}
+    </div>
+</div>
+</body>
+</html>

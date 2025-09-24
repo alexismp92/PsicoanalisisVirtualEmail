@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to {{company}}</title>
+  <title>Complete Your Onboarding - Payment Pending</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,46 +24,37 @@
       padding-bottom: 20px;
       border-bottom: 1px solid #e4e4e4;
     }
-    .header img {
-      max-width: 120px;
-    }
     h1 {
       color: #333333;
-      font-size: 24px;
+      text-align: center;
     }
     p {
       color: #555555;
-      font-size: 16px;
       line-height: 1.5;
+    }
+    .alert {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      color: #856404;
     }
     .button {
       display: inline-block;
       padding: 12px 24px;
-      margin: 20px 0;
+      margin: 20px auto;
       background-color: #28a745;
-      color: #ffffff !important;
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 4px;
       font-weight: bold;
     }
     .footer {
       text-align: center;
-      color: #999999;
       font-size: 12px;
-      padding-top: 20px;
-      border-top: 1px solid #e4e4e4;
-    }
-    @media screen and (max-width: 600px) {
-      .container {
-        margin: 20px;
-        padding: 15px;
-      }
-      h1 {
-        font-size: 20px;
-      }
-      p, .button {
-        font-size: 16px;
-      }
+      color: #888888;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -74,23 +65,25 @@
     <img src="{{logo_url}}" alt="{{company}}">
   </div>
 
-  <h1>Welcome, {{name}}!</h1>
+  <h1>Complete Your Onboarding</h1>
+  <p>Hello {{therapist_name}},</p>
+  <p>Thank you for your interest in joining the {{company}} community! We’re excited to review your application. To complete your onboarding, please finalize your payment.</p>
 
-  <p>Thank you for joining our community. We are excited to have you on board.</p>
-
-  <p>To get started, please access to your account and explore all the features we offer.</p>
+  <div class="alert">
+    <p><strong>Status:</strong> Payment Pending</p>
+    <p>Once your payment is confirmed, our team will finish reviewing your request and notify you of the result.</p>
+  </div>
 
   <p style="text-align: center;">
-    <a href="{{login_url}}" class="button">Access to your account</a>
+    <a href="{{payment_url}}" class="button">Complete Payment</a>
   </p>
 
-  <p>If you have any questions, feel free to reply to this email. We’re here to help!</p>
+  <p>If you have any questions or issues with payment, please reply to this email or contact our support team. We’re here to help!</p>
 
   <div class="footer">
     &copy; {{year}} {{company}}. All rights reserved.<br>
     {{address}}
   </div>
-
 </div>
 </body>
 </html>

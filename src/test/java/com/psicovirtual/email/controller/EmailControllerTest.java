@@ -50,7 +50,7 @@ class EmailControllerTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isOk());
@@ -75,7 +75,7 @@ class EmailControllerTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
@@ -86,7 +86,7 @@ class EmailControllerTest {
 
         String emailJson = """
                 {
-                  "emailType": "APPROVED_USER",
+                  "emailType": "WELCOME_USER",
                   "language": "ENGLISH",
                   "emails": [
                     "test@"
@@ -100,7 +100,7 @@ class EmailControllerTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
@@ -124,7 +124,7 @@ class EmailControllerTest {
                 }
                 """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/emails/actions/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
