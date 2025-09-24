@@ -11,4 +11,6 @@ public class EmailProperties {
     private String company;
     private String address;
     private String logo;
+    private String loginUrl;
+    private String supportUrl;
 }

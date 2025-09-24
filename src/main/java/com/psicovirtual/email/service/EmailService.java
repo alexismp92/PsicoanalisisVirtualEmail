@@ -131,6 +131,14 @@ public class EmailService {
             emailDTO.getValues().put(EmailContentEnum.LOGO, String.valueOf(emailProperties.getLogo()));
         }
 
+        if(!emailDTO.getValues().containsKey(EmailContentEnum.LOGIN)){
+            emailDTO.getValues().put(EmailContentEnum.LOGIN, String.valueOf(emailProperties.getLoginUrl()));
+        }
+
+        if(!emailDTO.getValues().containsKey(EmailContentEnum.SUPPORT)){
+            emailDTO.getValues().put(EmailContentEnum.SUPPORT, String.valueOf(emailProperties.getSupportUrl()));
+        }
+
         if(!emailDTO.getValues().containsKey(EmailContentEnum.YEAR)){
             emailDTO.getValues().put(EmailContentEnum.YEAR, String.valueOf(LocalDate.now().getYear()));
         }
