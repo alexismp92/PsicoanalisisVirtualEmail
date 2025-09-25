@@ -1,7 +1,6 @@
 package com.psicovirtual.email.service.bucket.imp;
 
 import com.psicovirtual.email.component.S3Properties;
-import com.psicovirtual.email.exception.EmailException;
 import com.psicovirtual.email.service.bucket.IBucketOperations;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.HashSet;
-import java.util.Set;
+
 
 import static com.psicovirtual.email.utils.Constants.S3;
 import static com.psicovirtual.email.utils.Constants.SLASH;

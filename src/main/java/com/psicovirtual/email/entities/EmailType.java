@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class EmailTypes {
+@Table(name = "EMAIL_TYPES")
+public class EmailType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_type_seq")
-    @SequenceGenerator(name = "email_type_seq", sequenceName = "email_type_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "email_type_seq", sequenceName = "email_types_sequence", allocationSize = 1)
     private Long emailTypeId;
     private String emailType;
 }

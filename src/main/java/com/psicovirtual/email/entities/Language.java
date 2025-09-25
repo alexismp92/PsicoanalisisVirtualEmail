@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class Languages {
+@Table(name = "LANGUAGES")
+public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "language_seq")
-    @SequenceGenerator(name = "language_seq", sequenceName = "language_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "language_seq", sequenceName = "languages_sequence", allocationSize = 1)
     private Long languageId;
     private String languageCode;
     private String languageName;
