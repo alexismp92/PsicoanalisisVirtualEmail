@@ -27,7 +27,7 @@ import static org.springdoc.core.utils.Constants.DOT;
 @Service
 @AllArgsConstructor
 @Slf4j
-@Profile("!local")
+@Profile({"test,prod"})
 public class AWSBucketService implements IBucketOperations {
 
     private final S3Properties s3Properties;

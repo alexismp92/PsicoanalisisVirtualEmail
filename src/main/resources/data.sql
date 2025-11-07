@@ -13,7 +13,7 @@ INSERT INTO EMAIL_TYPES (EMAIL_TYPE_ID, EMAIL_TYPE) VALUES
 INSERT INTO EMAIL_CONFIGS (EMAIL_CFG_ID, EMAIL_TYPE_ID, LANGUAGE_ID, EMAIL_FROM, EMAIL_TO, SUBJECT, FILE_PATH) VALUES
 (NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 1, 1, 'support@psicoanalisisvirtual.com', null, 'Welcome to Psicoanalisis Virtual', 'EMAIL\EN\WELCOME_USER.HTML'),
 (NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 2, 1, 'support@psicoanalisisvirtual.com', null, 'Welcome to Psicoanalisis Virtual', 'EMAIL\EN\WELCOME_THERAPIST.HTML'),
-(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 2, 1, 'support@psicoanalisisvirtual.com', null, 'Complete your onboarding', 'EMAIL\EN\PENDING_THERAPIST.HTML'),
+(NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 3, 1, 'support@psicoanalisisvirtual.com', null, 'Complete your onboarding', 'EMAIL\EN\PENDING_THERAPIST.HTML'),
 (NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 4, 1, 'support@psicoanalisisvirtual.com', null, 'Your request has been approved', 'EMAIL\EN\APPROVED_THERAPIST.HTML'),
 (NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 5, 1, 'support@psicoanalisisvirtual.com', null, 'Your account has been locked', 'EMAIL\EN\DENIED_THERAPIST.HTML'),
 (NEXT VALUE FOR EMAIL_CONFIGS_SEQUENCE, 6, 1, 'noreply@psicoanalisisvirtual.com', null, 'Password Update', 'EMAIL\EN\PASSWORD_RESET.HTML');

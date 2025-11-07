@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Profile({"local"})
+@Profile({"!uat", "!prod"})
 public class LocalFileService implements IBucketOperations {
 
     private final S3Properties s3Properties;

@@ -23,8 +23,8 @@ public class EmailConfigService {
      * @throws NotFoundException if the email configuration is not found
      */
     public EmailConfig getEmailByTypeAndLanguage(String type, String language) throws NotFoundException {
-        log.info("looking for email type {%s} and language {%s}", type, language);
-        return this.iEmailConfigRepo.findByEmailType_EmailTypeAndLanguage_LanguageName(type, language).orElseThrow(() -> new NotFoundException("Email type " + type + " and language " + language + " not found"));
+        log.info("looking for email type %s and language %s", type, language);
+        return this.iEmailConfigRepo.findByEmailTypeAndLanguageName(type, language).orElseThrow(() -> new NotFoundException("Email type " + type + " and language " + language + " not found"));
     }
 
 }
