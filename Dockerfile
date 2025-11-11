@@ -1,5 +1,4 @@
 # Use an official OpenJDK runtime as a parent image
-#FROM openjdk:22-jdk
 FROM alpine/java:22-jdk
 
 # Set the working directory in the container
@@ -13,13 +12,12 @@ LABEL org.opencontainers.image.title="Psicoanalisis Virtual Email" \
 # Copy the project JAR file into the container at /app
 RUN mkdir -p /app/images
 
-COPY src/main/resources/static/logo.jpg /app/images/logo.jpg
 COPY target/PsicoanalisisVirtualEmail-*.jar app/PsicoanalisisVirtualEmail.jar
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-ENV SPRING_PROFILES_ACTIVE=local
+ENV SPRING_PROFILES_ACTIVE=dev
 
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "app/PsicoanalisisVirtualEmail.jar"]

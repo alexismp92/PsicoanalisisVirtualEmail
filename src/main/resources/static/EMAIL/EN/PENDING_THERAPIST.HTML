@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Onboarding - Payment Pending</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e4e4e4;
+    }
+    h1 {
+      color: #333333;
+      text-align: center;
+    }
+    p {
+      color: #555555;
+      line-height: 1.5;
+    }
+    .alert {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 20px 0;
+      color: #856404;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 20px auto;
+      background-color: #28a745;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888888;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <img src="{{logo_url}}" alt="{{company}}">
+  </div>
+
+  <h1>Complete Your Onboarding</h1>
+  <p>Hello {{therapist_name}},</p>
+  <p>Thank you for your interest in joining the {{company}} community! We’re excited to review your application. To complete your onboarding, please finalize your payment.</p>
+
+  <div class="alert">
+    <p><strong>Status:</strong> Payment Pending</p>
+    <p>Once your payment is confirmed, our team will finish reviewing your request and notify you of the result.</p>
+  </div>
+
+  <p style="text-align: center;">
+    <a href="{{payment_url}}" class="button">Complete Payment</a>
+  </p>
+
+  <p>If you have any questions or issues with payment, please reply to this email or contact our support team. We’re here to help!</p>
+
+  <div class="footer">
+    &copy; {{year}} {{company}}. All rights reserved.<br>
+    {{address}}
+  </div>
+</div>
+</body>
+</html>

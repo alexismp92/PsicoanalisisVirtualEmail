@@ -11,7 +11,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 @Configuration
 @AllArgsConstructor
-@Profile("!local")
+@Profile({"test,prod"})
 public class AWSConfiguration {
 
     @Bean

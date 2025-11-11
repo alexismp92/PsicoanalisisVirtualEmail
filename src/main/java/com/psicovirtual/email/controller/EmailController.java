@@ -1,6 +1,6 @@
 package com.psicovirtual.email.controller;
 
-import com.psicovirtual.email.dto.EmailDTO;
+import com.psicovirtual.email.dto.EmailRequestDTO;
 import com.psicovirtual.email.exception.EmailException;
 import com.psicovirtual.email.service.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/email")
+@RequestMapping("/emails")
 @Validated
 @Tag(name = "Email Service")
 public class EmailController {
@@ -32,10 +32,10 @@ public class EmailController {
                     @ApiResponse(responseCode = "400", description = "Bad request"),
                     @ApiResponse(responseCode = "500", description = "Internal server error")
             })
-    public ResponseEntity<Void> send(@RequestBody EmailDTO emailDTO) throws EmailException {
-        log.info("Email request received: " + emailDTO.toString());
+    public ResponseEntity<Void> send(@RequestBody EmailRequestDTO emailRequestDTO) throws EmailException {
+        log.info("Email request received: " + emailRequestDTO.toString());
 
-        emailService.sendEmail(emailDTO);
+        emailService.sendEmail(emailRequestDTO);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

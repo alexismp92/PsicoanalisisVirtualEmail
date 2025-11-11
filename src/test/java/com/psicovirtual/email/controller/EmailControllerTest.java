@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -17,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("local")
 class EmailControllerTest {
 
     @Autowired
@@ -27,7 +25,7 @@ class EmailControllerTest {
 
     @BeforeEach
     void setUp() {
-        greenMail = new GreenMail(new ServerSetup(1025, null, "smtp"));
+        greenMail = new GreenMail(new ServerSetup(8025, null, "smtp"));
         greenMail.start();
     }
 
@@ -38,9 +36,19 @@ class EmailControllerTest {
 
     @Test
     void testSendEmail() throws Exception {
-        String emailJson = "{\"emailFrom\":\"noreply@example.com\",\"emails\":[\"test@example.com\"],\"subject\":\"Test Subject\",\"message\":\"<html><body><h1>TestBody</h1><img src='cid:logo.jpg'></body></html>\"}";
+        String emailJson = """
+                {
+                  "emailType": "WELCOME_USER",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@hotmail.com"
+                  ],
+                  "values": {
+                    "NAME": "JHON"                  }
+                }
+                """;
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isOk());
@@ -48,9 +56,73 @@ class EmailControllerTest {
 
     @Test
     void testSendEmailInvalidRequest() throws Exception {
-        String emailJson = "{\"emailFrom\":\"\",\"emails\":[\"test@example.com\"],\"subject\":\"\",\"message\":\"\"}";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/email/send")
+        String emailJson = """
+                {
+                  "emailType": "WELCOME_USER",
+                  "language": "FRANCOIS",
+                  "emails": [
+                    "test@hotmail.com"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(emailJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testSendEmailInvalidEmail() throws Exception {
+
+        String emailJson = """
+                {
+                  "emailType": "WELCOME_USER",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(emailJson))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testSendEmailInvalidEmailType() throws Exception {
+        String emailJson = """
+                {
+                  "emailType": "",
+                  "language": "ENGLISH",
+                  "emails": [
+                    "test@"
+                  ],
+                  "values": {
+                    "NAME": "TEST",
+                    "YEAR": "2025",
+                    "COMPANY": "Psicoanalisis Virtual",
+                    "LOGO" : "https://test.com/logo.png"
+                  }
+                }
+                """;
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/emails/send")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(emailJson))
                 .andExpect(status().isBadRequest());
